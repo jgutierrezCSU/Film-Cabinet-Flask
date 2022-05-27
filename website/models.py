@@ -15,5 +15,5 @@ class User(db.Model, UserMixin): #userMixin allows "current_user" module to acce
     email = db.Column(db.String(150), unique=True) #unique, no tother use can have same email
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
-    took_survey=db.Column(db.Boolean, default=func.now())
+    took_survey=db.Column(db.Boolean, default=False)
     notes = db.relationship('Note')

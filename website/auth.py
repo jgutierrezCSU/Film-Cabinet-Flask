@@ -71,6 +71,7 @@ def signup():
             #log in user to a session
             login_user(new_user,remember=True)
             flash('Account created!', category='success')
-            #after Log in , redirect Home
-            return redirect(url_for('views.home'))
+
+            #redirect to survey page:
+            return redirect(url_for('views.survey'))
     return render_template("signup.html",user=current_user) # current_user from built in library
