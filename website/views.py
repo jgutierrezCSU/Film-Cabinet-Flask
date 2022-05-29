@@ -13,9 +13,9 @@ def home():
     #passes user to base, display certain items if logged in, else does not display 
     return render_template("home.html" , user=current_user) 
 
-#defining views Blueprint
-@views.route('/survey')
-@login_required
-def survey():
-    #passes user to base, display certain items if logged in, else does not display 
-    return render_template("survey.html" , user=current_user) 
+# #defining views Blueprint
+# @views.route('/survey')
+# @login_required
+# def survey():
+#     #passes user to base, display certain items if logged in, else does not display 
+#     return render_template("survey.html" , user=current_user) 

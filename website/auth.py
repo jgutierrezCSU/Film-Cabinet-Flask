@@ -32,7 +32,6 @@ def login():
         else: #not Valid User Email
                 print("No email found")
                 flash('Email does not exist, try again.', category='error')
-    print("returning login")
     return render_template("login.html",user=current_user)
 
 @auth.route('/logout/')
@@ -77,5 +76,5 @@ def signup():
             flash('Account created!', category='success')
 
             #redirect to survey page:
-            return redirect(url_for('views.survey'))
+            return redirect(url_for('survey.getSurveyInfo'))
     return render_template("signup.html",user=current_user) # current_user from built in library

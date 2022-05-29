@@ -3,12 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Survey</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- for SurveyJS -->
+  <link href="https://unpkg.com/survey-jquery@1.8.35/modern.css" type="text/css" rel="stylesheet" />
+  <script src="https://unpkg.com/survey-jquery@1.8.35/survey.jquery.min.js"></script>
+  <!-- end SurveyJS -->
   <!-- run modal on load -->
 	<script>
     $(document).ready(function(){
@@ -60,6 +65,42 @@
     </div>
   </div>
 </div>
+
+<div id="surveyContainer"></div>
+
+<!-- For Survey JS -->
+<script>
+Survey.StylesManager.applyTheme("modern");
+
+var surveyJSON = { "pages": [{ "name": "page1", "elements": [{ "type": "ranking", "name": "Rank your Favorite category", "title": "Rank your Favorite category ", "description": "Ranking Categories", "isRequired": true, "choices": ["Horror", "Romance", "Sci-FI", "Action", "Comedy"] }, { "type": "multipletext", "name": "last 3 series you watch", "title": "What was the last 3 series you watch ?", "description": "last 3 series you watch", "items": [{ "name": "Series 1" }, { "name": "Series 2" }, { "name": "Series 3" }] }, { "type": "panel", "name": "panel1", "elements": [{ "type": "html", "name": "question1", "html": "<h1> Are you a fan of any of these Producers ? </h1>" }] }, { "type": "boolean", "name": "Quentin Tarantino", "title": "Quentin Tarantino" }, { "type": "boolean", "name": "Kathleen Kennedy", "title": "Kathleen Kennedy" }, { "type": "boolean", "name": "Spike Lee", "title": "Spike Lee" }, { "type": "boolean", "name": "Kevin Feige", "title": "Kevin Feige" }] }], "showCompletedPage": false }
+
+function sendDataToServer(survey) {
+    //send Ajax request to your web server.
+    document.getElementById("surveyContainer").style.display = "none";
+    // get survey results
+    const surveyData = JSON.stringify(survey.data) 
+   // send survey results to backend via POST 
+    $.post( "/survey", {
+      data: surveyData 
+});
+    
+   
+
+}
+
+// function given from surveyJS
+var survey = new Survey.Model(surveyJSON);
+$("#surveyContainer").Survey({
+    async: true,
+    model: survey,
+    onComplete: sendDataToServer
+});
+
+
+
+
+</script>
+
 
 </body>
 </html>
