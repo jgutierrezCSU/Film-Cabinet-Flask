@@ -15,13 +15,6 @@ views=Blueprint('views',__name__)
 @views.route('/')
 @login_required
 def home():
-	#for testing
-	# usrId=current_user.get_id()
-	# print("Home cur_userId:",usrId )
-	# user = User.query.filter_by(id=usrId).first()
-	# print("home usr_db",user.took_survey)
-	#end testing
-
 	#passes user to base, display certain items if logged in, else does not display 
 	return render_template("home.html" , user=current_user) 
 
