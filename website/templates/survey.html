@@ -17,22 +17,30 @@
   <!-- run modal on load -->
 	<script>
     $(document).ready(function(){
-        $("#myModal").modal('show');
+    	 $("#startUpModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $("#startUpModal").modal('show');
     });
 	</script>
 	<!-- end modal on load -->
 
 </head>
 <body>
-<h1> surveypage </h1>
+
+
+
+
+
 <div class="container">
   
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <!-- On start Modal -->
+  <div class="modal fade" id="startUpModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         
           <h3 class="modal-title">Would you like to take the survey </h3>
         </div>
         <div class="modal-body">
@@ -66,10 +74,42 @@
   </div>
 </div>
 
+<div class="container">
+  
+  <!-- On start Modal -->
+  <div class="modal fade" id="completedModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h3 class="modal-title">Your Experience is now customized</h3>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for taking the survey</p>
+        </div>
+        <div class="modal-footer">
+
+       
+          <a href="/" class="btn btn-primary" style="background-color: #55acee;"  role="button" >
+            <i class="fab fa-twitter me-2"></i>
+            To Home Page
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
 <div id="surveyContainer"></div>
+
+<a class="nav-item nav-link" id="home" href="/">Home</a>
 
 <!-- For Survey JS -->
 <script>
+
+ document.getElementById("surveyContainer").style.display = "block"
 Survey.StylesManager.applyTheme("modern");
 
 var surveyJSON = { "pages": [{ "name": "page1", "elements": [{ "type": "ranking", "name": "Rank your Favorite category", "title": "Rank your Favorite category ", "description": "Ranking Categories", "isRequired": true, "choices": ["Horror", "Romance", "Sci-FI", "Action", "Comedy"] }, { "type": "multipletext", "name": "last 3 series you watch", "title": "What was the last 3 series you watch ?", "description": "last 3 series you watch", "items": [{ "name": "Series 1" }, { "name": "Series 2" }, { "name": "Series 3" }] }, { "type": "panel", "name": "panel1", "elements": [{ "type": "html", "name": "question1", "html": "<h1> Are you a fan of any of these Producers ? </h1>" }] }, { "type": "boolean", "name": "Quentin Tarantino", "title": "Quentin Tarantino" }, { "type": "boolean", "name": "Kathleen Kennedy", "title": "Kathleen Kennedy" }, { "type": "boolean", "name": "Spike Lee", "title": "Spike Lee" }, { "type": "boolean", "name": "Kevin Feige", "title": "Kevin Feige" }] }], "showCompletedPage": false }
@@ -77,16 +117,23 @@ var surveyJSON = { "pages": [{ "name": "page1", "elements": [{ "type": "ranking"
 function sendDataToServer(survey) {
     //send Ajax request to your web server.
     document.getElementById("surveyContainer").style.display = "none";
+    //to show Modal after taking survey
+    $(document).ready(function(){
+    	$("#completedModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $("#completedModal").modal('show');
+    });
+
     // get survey results
     const surveyData = JSON.stringify(survey.data) 
    // send survey results to backend via POST 
     $.post( "/survey", {
-      data: surveyData 
-});
-    
-   
+      data: surveyData });
 
 }
+
 
 // function given from surveyJS
 var survey = new Survey.Model(surveyJSON);

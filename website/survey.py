@@ -13,6 +13,5 @@ def getSurveyInfo():
         surveyData = request.form['data']
         print(surveyData)
         print("here")
-        return render_template("home.html",user=current_user ) 
     print("outside")
     return render_template("survey.html" ,user=current_user) 
