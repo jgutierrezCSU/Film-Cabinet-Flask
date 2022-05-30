@@ -12,6 +12,13 @@ def getSurveyInfo():
     if request.method == 'POST':
         surveyData = request.form['data']
         print(surveyData)
-        print("here")
-    print("outside")
+        #user took survey , set to true
+        usrId=current_user.get_id()
+        print("cur_userId:" ,usrId )
+        user = User.query.filter_by(id=usrId).first()
+        print("usr_db",user.took_survey)
+        user.took_survey=True
+        print("usr_db",user.took_survey)
+        db.session.commit()
+
     return render_template("survey.html" ,user=current_user) 

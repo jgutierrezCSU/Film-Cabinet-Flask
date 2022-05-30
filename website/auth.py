@@ -49,7 +49,7 @@ def signup():
         first_name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        print(email,first_name,password1,password2)
+       
 
         #find User w/ Email
         #check if already a userw/ that email
