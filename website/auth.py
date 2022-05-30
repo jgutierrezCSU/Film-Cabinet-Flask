@@ -18,7 +18,6 @@ def login():
         #find User w/ Email
         user = User.query.filter_by(email=email).first() # should only be one user w/ unique email
         if user: #if valid User Email
-            print("valid user")
             #if correct PW
             if check_password_hash(user.password, password): #method for comparing hashed PW, and passed in Pw
                 flash('Logged in successfully!', category='success')
@@ -27,10 +26,8 @@ def login():
                 return redirect(url_for('views.home'))
             # Not correct PW
             else:
-                print("pw No good")
                 flash('Incorrect password, try again.', category='error')
         else: #not Valid User Email
-                print("No email found")
                 flash('Email does not exist, try again.', category='error')
     return render_template("login.html",user=current_user)
 
