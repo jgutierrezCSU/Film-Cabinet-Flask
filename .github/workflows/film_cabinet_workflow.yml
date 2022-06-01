@@ -12,9 +12,9 @@ jobs:
     - name: for film_cabinet ssh connection
       uses: appleboy/ssh-action@master
       with:
-        host: 31.19.220.96
-        username: film-cabinet
-        key: ${{ secrets.FILM_CABINET_SECRET }}
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
         port: 22
         script: |
           cd /var/www/Film-Cabinet-Flask/
