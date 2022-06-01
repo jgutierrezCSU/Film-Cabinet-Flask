@@ -1,0 +1,14 @@
+#to enable site 
+sudo a2ensite Film-Cabinet-Flask.conf 
+
+#start apache
+sudo systemctl start apache2
+
+#relod apache
+sudo systemctl reload apache2
+
+#
+sudo a2enmod wsgi
+
+#
+sudo apachectl restart
