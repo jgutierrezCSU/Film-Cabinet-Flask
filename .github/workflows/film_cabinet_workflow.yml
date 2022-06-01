@@ -18,6 +18,6 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /var/www/Film-Cabinet-Flask/
-          git pull
+          git pull https://github.com/jgutierrezCSU/Film-Cabinet-Flask.git
           git status
       
