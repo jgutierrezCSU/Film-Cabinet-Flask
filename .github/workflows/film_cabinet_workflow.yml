@@ -20,6 +20,6 @@ jobs:
           cd /var/www/Film-Cabinet-Flask/
           git add * 
           git stash
-          git pull
+          git pull https://github.com/jgutierrezCSU/Film-Cabinet-Flask.git 
           git status
       
