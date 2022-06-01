@@ -17,6 +17,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
+          sudo cp -r /var/www/Film-Cabinet-Flask/ ~film-cabinet/Documents/serverBackUp/dirCopy/
           cd /var/www/Film-Cabinet-Flask/
           sudo git pull
       
