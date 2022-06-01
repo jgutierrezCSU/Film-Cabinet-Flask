@@ -1,0 +1,22 @@
+name: Deployment Workflow
+on:
+  push:
+  branches: [master]
+
+jobs:
+  job_one:
+  name: Deploy
+  runs-on: ubuntu-latest
+  steps:
+  -name: for film_cabinet ssh connection
+  uses: appleboy/ssh-action@master
+  with:
+    host: 31.19.220.96
+    username: film-cabinet
+    key: ${{ secretes.FILM_CABINET_SECRET}}
+    port: 22
+    script: |
+      cd /var/www/Film-Cabinet-Flask/
+      git pull
+      git status
+      
