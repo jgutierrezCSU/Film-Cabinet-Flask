@@ -1,4 +1,3 @@
 #do not push these files
-
 website/database.db
 website/__pycache__
