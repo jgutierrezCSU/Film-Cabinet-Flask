@@ -20,4 +20,3 @@ jobs:
           sudo cp -r /var/www/Film-Cabinet-Flask /home/film-cabinet/Documents/websiteFilesBackUp/
           cd /var/www/Film-Cabinet-Flask/
           sudo git pull
-      
