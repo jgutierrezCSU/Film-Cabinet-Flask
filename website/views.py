@@ -6,17 +6,60 @@ from flask_login import  login_required, current_user
 from .models import User #testing for DB
 from . import db #testing for DB
 
+import csv
+import random
+import requests
+import config
+
 
 #Blueprint allows you to define URL 
-
 views=Blueprint('views',__name__)
 
 
 @views.route('/')
 @login_required
 def home():
-	#passes user to base, display certain items if logged in, else does not display 
-	return render_template("home.html" , user=current_user) 
+    #for random Future
+    # randomly select a movie
+    with open('website/netflix_titles.csv',encoding='utf-8') as f:
+        reader = csv.reader(f)
+        row = random.choice(list(reader))
+
+    movie = {
+        'id': row[0],
+        'category': row[1],
+        'title': row[2],
+        'director': row[3],
+        'cast': row[4],
+        'country': row[5],
+        'date_added': row[6],
+        'release_year': row[7],
+        'maturity': row[8],
+        'duration': row[9],
+        'genre': row[10],
+        'description': row[11],
+        # default poster just so we see something
+        'image': 'https://live.staticflickr.com/4422/36193190861_93b15edb32_z.jpg',
+        'imdb': 'Not Available'
+        }
+
+    # fetch cover image
+    # call OMDB database
+    url = f"http://www.omdbapi.com/?t={movie['title']}/&apikey={config.api_key}"
+    # get back the response
+    response = requests.request("GET", url)
+    # parse result into JSON and look for matching data if available
+    movie_data = response.json()
+    if 'Poster' in movie_data:
+        movie['image'] = movie_data['Poster']
+    if 'imdbRating' in movie_data:
+        movie['imdb'] = movie_data['imdbRating']
+
+
+
+    #end random Future
+    #passes user to base, display certain items if logged in, else does not display 
+    return render_template("home.html" , user=current_user, movie=movie) 
 
 @views.route('/user/<username>')
 @login_required
