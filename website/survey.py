@@ -1,7 +1,6 @@
 from flask import Blueprint, redirect, render_template,request,flash, url_for
 from flask_login import  login_required, current_user
 from .models import User
-
 from . import db
 
 #Blueprint allows you to define URL 
