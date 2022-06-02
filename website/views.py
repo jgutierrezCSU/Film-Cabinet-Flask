@@ -1,3 +1,4 @@
+from typing import final
 from flask import Blueprint ,render_template
 
 from website.auth import login
@@ -20,10 +21,22 @@ views=Blueprint('views',__name__)
 @login_required
 def home():
     #for random Future
-    # randomly select a movie
-    with open('website/netflix_titles.csv',encoding='utf-8') as f:
-        reader = csv.reader(f)
-        row = random.choice(list(reader))
+    
+    #looks for file using server path
+    try:
+        with open('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv',encoding='utf-8') as f:
+            # randomly select a movie
+            reader = csv.reader(f)
+            row = random.choice(list(reader))
+    except:
+        print("Server path not found: Trying local path")
+    #looks for file in normal Python library
+    finally:
+        with open('website/netflix_titles.csv',encoding='utf-8') as f:
+            # randomly select a movie
+            reader = csv.reader(f)
+            row = random.choice(list(reader))
+
 
     movie = {
         'id': row[0],
