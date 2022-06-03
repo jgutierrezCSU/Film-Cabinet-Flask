@@ -1,6 +1,5 @@
-from typing import final
 from flask import Blueprint ,render_template
-
+from os.path import exists
 from website.auth import login
 from flask_login import  login_required, current_user
 
@@ -15,29 +14,44 @@ import config
 
 #Blueprint allows you to define URL 
 views=Blueprint('views',__name__)
+def getUSMovie():
+    pass
 
 
 @views.route('/')
 @login_required
 def home():
+    print("home")
     #for random Future
-    
     #looks for file using server path
     try:
-        with open('website/netflix_titles.csv',encoding='utf-8') as f:
-            # randomly select a movie
-            reader = csv.reader(f)
-            row = random.choice(list(reader))
+        # checks if local path exist
+        local_path=exists('website/netflix_titles.csv')
+        
     except:
-        print("Server path not found: Trying local path")
+        print("Local path not found: Trying server path")
     #looks for file in normal Python library
     try:
-        with open('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv',encoding='utf-8') as f:
-            # randomly select a movie
-            reader = csv.reader(f)
-            row = random.choice(list(reader))
+        # checks if server path exist
+        server_path=exists('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv')
+
     except:
-        print("Could not find any paths. Attempted 2 paths")
+        print("server path not found. Local path used")
+
+    if local_path:
+        data = list(csv.reader(open('website/netflix_titles.csv'))) # get CSV and turn into list
+        #for loop to gey USA films
+        while True:
+            row = random.choice(data)# get random row from csv
+            if row[5] == "United States":
+                break
+    else:
+        data = list(csv.reader(open('website/netflix_titles.csv'))) # get CSV and turn into list
+        #for loop to gey USA films
+        while True:
+            row = random.choice(data)# get random row from csv
+            if row[5] == "United States":
+                break
 
     movie = {
         'id': row[0],
@@ -52,12 +66,11 @@ def home():
         'duration': row[9],
         'genre': row[10],
         'description': row[11],
-        # default poster just so we see something
-        'image': 'https://live.staticflickr.com/4422/36193190861_93b15edb32_z.jpg',
+        'image': 'https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-300x450.jpg',
         'imdb': 'Not Available'
         }
 
-    # fetch cover image
+    # get cover image
     # call OMDB database
     url = f"http://www.omdbapi.com/?t={movie['title']}/&apikey={config.api_key}"
     # get back the response
@@ -68,8 +81,6 @@ def home():
         movie['image'] = movie_data['Poster']
     if 'imdbRating' in movie_data:
         movie['imdb'] = movie_data['imdbRating']
-
-
 
     #end random Future
     #passes user to base, display certain items if logged in, else does not display 
