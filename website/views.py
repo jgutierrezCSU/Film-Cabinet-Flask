@@ -39,7 +39,6 @@ def home():
     except:
         print("Could not find any paths. Attempted 2 paths")
 
-
     movie = {
         'id': row[0],
         'category': row[1],
