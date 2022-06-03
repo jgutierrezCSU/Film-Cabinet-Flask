@@ -24,18 +24,20 @@ def home():
     
     #looks for file using server path
     try:
-        with open('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv',encoding='utf-8') as f:
+        with open('website/netflix_titles.csv',encoding='utf-8') as f:
             # randomly select a movie
             reader = csv.reader(f)
             row = random.choice(list(reader))
     except:
         print("Server path not found: Trying local path")
     #looks for file in normal Python library
-    finally:
-        with open('website/netflix_titles.csv',encoding='utf-8') as f:
+    try:
+        with open('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv',encoding='utf-8') as f:
             # randomly select a movie
             reader = csv.reader(f)
             row = random.choice(list(reader))
+    except:
+        print("Could not find any paths. Attempted 2 paths")
 
 
     movie = {
