@@ -2,3 +2,4 @@
 website/database.db
 __pycache__
 config.py
+.travis.yml
