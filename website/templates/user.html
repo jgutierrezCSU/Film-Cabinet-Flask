@@ -16,14 +16,19 @@
               	<!-- replace w/ local image -->
                   <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
               </a>
-              <h1>Camila Smith</h1>
-              <p>deydey@theEmail.com</p>
+              <h1>Jane DOe</h1>
+              <p>FilmCabinetUser@gmail.com</p>
           </div>
 
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
               <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span style="background-color:#ea6969;" class="label label-warning pull-right r-activity">9</span></a></li>
               <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+              {% if user.took_survey %}
+              <li><a href="{{ url_for('survey.getSurveyInfo') }}"> <i class="fa fa-edit"></i> Re-Take Survey</a></li>
+              {% else %}
+              <li><a href="#"> <i class="fa fa-edit"></i> Take Survey</a></li>
+              {% endif %}
           </ul>
       </div>
   </div>
