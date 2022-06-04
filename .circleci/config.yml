@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
+          name: "Compiling App"
           command: |
             sudo apt-get update
             sudo apt-get install -y python3-pip
@@ -24,13 +24,10 @@ jobs:
             sudo pip install flask-login
             touch config.py
             sudo $CONFIG_CMD
-            sudo pwd
-            ls
-            python3 app.py
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
+      - Compiling App
