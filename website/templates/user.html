@@ -15,14 +15,14 @@
               	<!-- replace w/ local image -->
                   <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
               </a>
-              <h1>Jane Doe</h1>
-              <p>FilmCabinetUser@gmail.com</p>
+              <h1>{{ user.user_name }}</h1>
+              <p>{{ user.email }}</p>
           </div>
 
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
               <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span style="background-color:#ea6969;" class="label label-warning pull-right r-activity">9</span></a></li>
-              <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+              <li><a href="javascript:onclick=toggle_display();" style="outline: none; box-shadow: none;">  <i class="fa fa-edit"></i> Edit profile</a></li>
               {% if user.took_survey %}
               <li><a href="{{ url_for('survey.getSurveyInfo') }}"> <i class="fa fa-edit"></i> Re-Take Survey</a></li>
               {% else %}
@@ -62,10 +62,14 @@
               <h1>Bio Graph</h1>
               <div class="row">
                   <div class="bio-row">
-                      <p><span>First Name </span>: Camila</p>
+                      <p><span>User Name </span>: {{ user.user_name }}</p>
                   </div>
+                  <div class="bio-row-hidden" style="visibility: hidden;">
+                    <p><span>User Name </span>: {{ user.user_name }}</p>
+                </div> 
+
                   <div class="bio-row">
-                      <p><span>Last Name </span>: Smith</p>
+                      <p><span>Full Name </span>:  NA</p>
                   </div>
                   <div class="bio-row">
                       <p><span>Country </span>: Australia</p>
@@ -77,13 +81,7 @@
                       <p><span>Occupation </span>: UI Designer</p>
                   </div>
                   <div class="bio-row">
-                      <p><span>Email </span>: jsmith@flatlab.com</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Mobile </span>: (12) 03 4567890</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Phone </span>: 88 (02) 123456</p>
+                      <p><span>Email </span>: {{ user.email }}</p>
                   </div>
               </div>
           </div>
@@ -171,14 +169,26 @@
 
 
 	<script type="text/javascript">
+        function toggle_display(){
+            edit_forms = document.querySelector('.bio-row-hidden');
+  
+            if(edit_forms.style.visibility == 'hidden')
+            {
+             edit_forms.style.visibility = 'visible'
+            }
+                else
+                {
+                  edit_forms.style.visibility = 'hidden'
+                 }
+            }
 	</script>
 
 
-    <h1>Hello: {{ user.first_name }}</h1>
+    <h1>Hello: {{ user.user_name }}</h1>
     <hr>
     {% for post in posts %}
     <p>
-    {{ post.author.first_name }} says: <b>{{ post.body }}</b>
+    {{ post.author.user_name }} says: <b>{{ post.body }}</b>
     </p>
     {% endfor %}
 

@@ -11,8 +11,7 @@ user_Profile=Blueprint('user',__name__)
 @user_Profile.route('/user/<username>')
 @login_required
 def user(username):
-    user = User.query.filter_by(first_name=username).first_or_404()
-    # print("N",user.first_name)
+    user = User.query.filter_by(user_name=username).first_or_404()
     # print("S",user.took_survey)
     posts = [
     	#pass user object to user.html

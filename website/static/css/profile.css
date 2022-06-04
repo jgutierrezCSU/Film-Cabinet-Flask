@@ -136,6 +136,12 @@ ody {
     margin-bottom: 10px;
     padding:0 15px;
 }
+.bio-row-hidden {
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+    padding:0 15px;
+}
 
 .bio-row p span {
     width: 100px;

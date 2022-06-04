@@ -42,7 +42,7 @@ def signup():
     if request.method == 'POST':
         #get Info from login.htnl after submit
         email = request.form.get('email')
-        first_name = request.form.get('firstName')
+        user_name = request.form.get('userN')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
        
@@ -54,7 +54,7 @@ def signup():
             flash('Email already exists.', category='error')
         elif len(email) < 4:
             flash('Not Valid Email',category='error')
-        elif len(first_name) < 2:
+        elif len(user_name) < 2:
                 flash('Enter Valid Name', category='error')
         elif password1 != password2:
                 flash('Passwords Do Not Match.', category='error')
@@ -63,7 +63,7 @@ def signup():
         else:
             #store new user in DB
             #generate a hashed PW and store
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(
+            new_user = User(email=email, user_name=user_name, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user) #add new user to DB
             db.session.commit() # update
