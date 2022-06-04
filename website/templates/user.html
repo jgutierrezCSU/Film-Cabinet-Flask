@@ -60,29 +60,41 @@
           </div>
           <div class="panel-body bio-graph-info">
               <h1>Bio Graph</h1>
-              <div class="row">
-                  <div class="bio-row">
+              <div class="bio-row-show" >
+                <div class="bio-row" >
                       <p><span>User Name </span>: {{ user.user_name }}</p>
-                  </div>
-                  <div class="bio-row-hidden" style="visibility: hidden;">
-                    <p><span>User Name </span>: {{ user.user_name }}</p>
-                </div> 
-
-                  <div class="bio-row">
+                </div>
+                <div class="bio-row" >
                       <p><span>Full Name </span>:  NA</p>
-                  </div>
-                  <div class="bio-row">
+                </div>
+                <div class="bio-row" >
                       <p><span>Country </span>: Australia</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Birthday</span>: 13 July 1983</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Occupation </span>: UI Designer</p>
-                  </div>
-                  <div class="bio-row">
+                </div>
+                <div class="bio-row" >
+                      <p><span>Date Of Birth</span>: 13 July 1983</p>
+                </div>
+                <div class="bio-row" >
                       <p><span>Email </span>: {{ user.email }}</p>
-                  </div>
+                </div>
+              </div>
+
+              <div class="bio-row-hidden" style="display: none;">
+                <div class="bio-row" >
+                    <p><span>User Name </span>:   <input type="text" id="edit_username" name="edit_username" placeholder="{{ user.user_name }}"></p>
+                </div>
+                <div class="bio-row" >               
+                    <!-- TODO   add profile database set defults to placeholder values ..ad jijna in placeholder -->
+                    <p><span>Full Name </span>:   <input type="text" id="edit_fullname" name="edit_fullname" placeholder="Full Name"></p>
+                </div>
+                 <div class="bio-row" >   
+                    <p><span>Country </span>:   <input type="text" id="edit_country" name="edit_country" placeholder="Country"> </p>
+                 </div>
+                <div class="bio-row" >
+                    <p><span>Date Of Birth</span>:   <input type="text" id="edit_dob" name="edit_dob" placeholder="MM/DD/YYYY"></p>
+                </div>
+                <div class="bio-row" >
+                    <p><span>Email </span>:   <input type="email" id="edit_email" name="edit_email" placeholder="{{ user.email }}"></p>
+                </div>
               </div>
           </div>
       </div>
@@ -154,31 +166,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<script type="text/javascript">
         function toggle_display(){
-            edit_forms = document.querySelector('.bio-row-hidden');
+            hidden_row = document.querySelector('.bio-row-hidden');
+            show_row = document.querySelector('.bio-row-show');
   
-            if(edit_forms.style.visibility == 'hidden')
+            if(hidden_row.style.display == 'none')
             {
-             edit_forms.style.visibility = 'visible'
+                hidden_row.style.display = 'block'
+                show_row.style.display = 'none'
+
             }
                 else
                 {
-                  edit_forms.style.visibility = 'hidden'
+                    hidden_row.style.display = 'none'
+                    show_row.style.display = 'block'
+
                  }
             }
 	</script>
