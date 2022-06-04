@@ -10,7 +10,7 @@ survey=Blueprint('survey',__name__)
 def getSurveyInfo():
     if request.method == 'POST':
         surveyData = request.form['data']
-        print(surveyData)
+        #print(surveyData)
         #user took survey , set to true
         usrId=current_user.get_id()
         user = User.query.filter_by(id=usrId).first()

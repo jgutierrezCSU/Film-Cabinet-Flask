@@ -21,9 +21,11 @@ def create_app():
     from .views import views
     from .auth import auth
     from .survey import survey
+    from .user import user
 
     app.register_blueprint(views,url_prefix='/') #no prefix
     app.register_blueprint(auth,url_prefix='/')
+    app.register_blueprint(survey,url_prefix='/')
     app.register_blueprint(survey,url_prefix='/')
     
     
