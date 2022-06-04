@@ -24,6 +24,7 @@ jobs:
             sudo pip install flask-login
             sudo $CONFIG_CMD
             sudo pwd
+            ls
             python3 app.py
 
 # Invoke jobs via workflows
