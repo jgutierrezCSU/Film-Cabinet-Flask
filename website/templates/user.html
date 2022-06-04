@@ -26,7 +26,7 @@
               {% if user.took_survey %}
               <li><a href="{{ url_for('survey.getSurveyInfo') }}"> <i class="fa fa-edit"></i> Re-Take Survey</a></li>
               {% else %}
-              <li><a href="#"> <i class="fa fa-edit"></i> Take Survey</a></li>
+              <li><a href="{{ url_for('survey.getSurveyInfo') }}"> <i class="fa fa-edit"></i> Take Survey</a></li>
               {% endif %}
           </ul>
       </div>
