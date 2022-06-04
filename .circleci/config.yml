@@ -22,6 +22,7 @@ jobs:
             sudo pip install flask
             sudo pip install Flask-SQLAlchemy
             sudo pip install flask-login
+            touch config.py
             sudo $CONFIG_CMD
             sudo pwd
             ls
