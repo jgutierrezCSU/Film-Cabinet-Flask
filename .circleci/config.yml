@@ -17,7 +17,10 @@ jobs:
       - run:
           name: "Say hello"
           command: |
-            echo Hello, World!
+            pip install flask
+            pip install Flask-SQLAlchemy
+            pip install flask-login
+            
             python3 app.py
 
 # Invoke jobs via workflows
