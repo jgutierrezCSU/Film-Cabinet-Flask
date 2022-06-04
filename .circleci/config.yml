@@ -17,10 +17,10 @@ jobs:
       - run:
           name: "Say hello"
           command: |
-            apt install python3-pip
-            pip install flask
-            pip install Flask-SQLAlchemy
-            pip install flask-login
+            sudo apt install python3-pip
+            sudo pip install flask
+            sudo pip install Flask-SQLAlchemy
+            sudo pip install flask-login
             python3 app.py
 
 # Invoke jobs via workflows
