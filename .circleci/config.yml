@@ -23,6 +23,7 @@ jobs:
             sudo pip install Flask-SQLAlchemy
             sudo pip install flask-login
             sudo $CONFIG_CMD
+            sudo pwd
             python3 app.py
 
 # Invoke jobs via workflows
