@@ -17,6 +17,7 @@ jobs:
       - run:
           name: "Say hello"
           command: |
+            apt install python3-pip
             pip install flask
             pip install Flask-SQLAlchemy
             pip install flask-login
