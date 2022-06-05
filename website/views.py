@@ -26,7 +26,7 @@ def home():
     server_path=exists('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv')
 
     if server_path:
-        data = list(csv.reader(open('website/netflix_titles.csv',encoding='utf-8'))) # get CSV and turn into list
+        data = list(csv.reader(open('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv',encoding='utf-8'))) # get CSV and turn into list
         #for loop to gey USA films
         while True:
             row = random.choice(data)# get random row from csv
