@@ -21,12 +21,12 @@ def create_app():
     from .views import views
     from .auth import auth
     from .survey import survey
-    from .user_Profile import user_Profile
+    from .user_profile import user_profile
 
     app.register_blueprint(views,url_prefix='/') #no prefix
     app.register_blueprint(auth,url_prefix='/')
     app.register_blueprint(survey,url_prefix='/')
-    app.register_blueprint(user_Profile,url_prefix='/')
+    app.register_blueprint(user_profile,url_prefix='/')
     
     
 

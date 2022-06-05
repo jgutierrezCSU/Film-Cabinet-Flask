@@ -22,7 +22,13 @@
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
               <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span style="background-color:#ea6969;" class="label label-warning pull-right r-activity">9</span></a></li>
-              <li><a href="javascript:onclick=toggle_display();" style="outline: none; box-shadow: none;">  <i class="fa fa-edit"></i> Edit profile</a></li>
+               <!-- TODO add close button if not editing -->
+              <li id="edit-save-show"><a href="javascript:onclick=toggle_display();">  <i class="fa fa-edit" ></i> Edit profile</a></li>
+             
+              <li id="edit-save-hidden" style="display: none;" onclick="myForm.submit();" ><a href="javascript:onclick=toggle_display()" ><i class="fa fa-edit" ></i>Save Changes  </a></li>
+
+              <li id="edit-save-show"><a href="{{ url_for('auth.update_cred', username=current_user.user_name) }}">  <i class="fa fa-edit" ></i> Change Log-In Info</a></li>
+              
               {% if user.took_survey %}
               <li><a href="{{ url_for('survey.getSurveyInfo') }}"> <i class="fa fa-edit"></i> Re-Take Survey</a></li>
               {% else %}
@@ -60,42 +66,38 @@
           </div>
           <div class="panel-body bio-graph-info">
               <h1>Bio Graph</h1>
-              <div class="bio-row-show" >
+               <div class="bio-row" >
+                  <p><span>User Name </span>: {{ user.user_name }}</p>
+               </div>
+               <div class="bio-row" >
+                 <p><span>Email</span>: {{ user.email }}</p>
+               </div>
+              <div class="profile-show" >
                 <div class="bio-row" >
-                      <p><span>User Name </span>: {{ user.user_name }}</p>
+                      <p><span>Full Name </span>: {{ profile.full_name }}</p>
                 </div>
                 <div class="bio-row" >
-                      <p><span>Full Name </span>:  NA</p>
+                      <p><span>Country </span>: {{ profile.country }}</p>
                 </div>
                 <div class="bio-row" >
-                      <p><span>Country </span>: Australia</p>
-                </div>
-                <div class="bio-row" >
-                      <p><span>Date Of Birth</span>: 13 July 1983</p>
-                </div>
-                <div class="bio-row" >
-                      <p><span>Email </span>: {{ user.email }}</p>
+                      <p><span>Date Of Birth</span>: {{ profile.dob }}</p>
                 </div>
               </div>
 
-              <div class="bio-row-hidden" style="display: none;">
-                <div class="bio-row" >
-                    <p><span>User Name </span>:   <input type="text" id="edit_username" name="edit_username" placeholder="{{ user.user_name }}"></p>
-                </div>
+              <form id="myForm"  method="POST">  
+              <div class="profile-hidden" style="display: none;">
                 <div class="bio-row" >               
-                    <!-- TODO   add profile database set defults to placeholder values ..ad jijna in placeholder -->
-                    <p><span>Full Name </span>:   <input type="text" id="edit_fullname" name="edit_fullname" placeholder="Full Name"></p>
+                    <p><span>Full Name </span>:   <input type="text" id="edit_fullname" name="edit_fullname" placeholder="{{ profile.full_name }}"></p>
                 </div>
                  <div class="bio-row" >   
-                    <p><span>Country </span>:   <input type="text" id="edit_country" name="edit_country" placeholder="Country"> </p>
+                    <p><span>Country </span>:   <input type="text" id="edit_country" name="edit_country" placeholder="{{ profile.country }}"> </p>
                  </div>
                 <div class="bio-row" >
-                    <p><span>Date Of Birth</span>:   <input type="text" id="edit_dob" name="edit_dob" placeholder="MM/DD/YYYY"></p>
-                </div>
-                <div class="bio-row" >
-                    <p><span>Email </span>:   <input type="email" id="edit_email" name="edit_email" placeholder="{{ user.email }}"></p>
+                    <p><span>Date Of Birth</span>:   <input type="text" id="edit_dob" name="edit_dob" placeholder="{{ profile.dob }}"></p>
                 </div>
               </div>
+              </form>
+
           </div>
       </div>
       <div>
@@ -168,22 +170,38 @@
 
 	<script type="text/javascript">
         function toggle_display(){
-            hidden_row = document.querySelector('.bio-row-hidden');
-            show_row = document.querySelector('.bio-row-show');
+            hidden_row = document.querySelector('.profile-hidden');
+            show_row = document.querySelector('.profile-show');
+            // btn
+            hidden_row_btn = document.getElementById('edit-save-hidden');
+            show_row_btn =document.getElementById('edit-save-show');
+  
   
             if(hidden_row.style.display == 'none')
             {
                 hidden_row.style.display = 'block'
                 show_row.style.display = 'none'
+                //for buttn
+                hidden_row_btn.style.display = 'block'
+                show_row_btn.style.display = 'none'
+
 
             }
                 else
                 {
                     hidden_row.style.display = 'none'
                     show_row.style.display = 'block'
+                    //for btn
+                    hidden_row_btn.style.display = 'none'
+                    show_row_btn.style.display = 'block'
 
                  }
             }
+
+        function send_post(){
+            var frm = document.getElementById('myform');
+            frm.submit()
+        }
 	</script>
 
 

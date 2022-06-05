@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template,request,flash, url_for
-from .models import User
+from .models import User , Profile
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import db
@@ -42,7 +42,7 @@ def signup():
     if request.method == 'POST':
         #get Info from login.htnl after submit
         email = request.form.get('email')
-        user_name = request.form.get('userN')
+        user_name = request.form.get('userName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
        
@@ -65,8 +65,24 @@ def signup():
             #generate a hashed PW and store
             new_user = User(email=email, user_name=user_name, password=generate_password_hash(
                 password1, method='sha256'))
+
             db.session.add(new_user) #add new user to DB
             db.session.commit() # update
+
+            #get new_user unique ID
+            curr_usr_id=current_user.get_id() #get curr user id
+            print(curr_usr_id)
+
+            #also generate Profile DB w/ defaults
+            user_profile = Profile(
+                           country="Country",
+                           full_name="Full Name",
+                           dob="MM/DD/YYYY",
+                           user_id=curr_usr_id
+                           )
+            db.session.add(user_profile)
+            db.session.commit()
+            
             #log in user to a session
             login_user(new_user,remember=True)
             flash('Account created!', category='success')
@@ -74,3 +90,38 @@ def signup():
             #redirect to survey page:
             return redirect(url_for('survey.getSurveyInfo'))
     return render_template("signup.html",user=current_user) # current_user from built in library
+
+@login_required
+@auth.route('/update-cred/',methods=["GET","POST"])
+def update_cred():
+    #get curr user id
+    curr_usr_id=current_user.get_id() 
+    #get user w/ that Unique ID
+    user = User.query.filter_by(id=curr_usr_id).first() 
+    if request.method == 'POST':
+        new_username = request.form.get('new_username')
+        if new_username == "":
+            new_username=user.user_name
+        new_email = request.form.get('new_email') 
+        if new_email =="":
+            new_email=user.email
+    #
+         #find a user in DB w/ that email from input (Object)
+        user_by_email = User.query.filter_by(email=new_email).first()
+        found_email=False
+        if user_by_email:
+            found_email=user_by_email.email
+            # TODO add flash error
+        if found_email == new_email :
+            print('Email already exists.')
+        elif len(new_email) < 4:
+            print('Not Valid Email')
+        #all checks out .Update to DB    
+        else:
+            user.user_name=new_username
+            user.email=new_email
+            db.session.commit()
+        return redirect(url_for('user_profile.user',username=current_user.user_name))
+
+
+    return render_template("update_cred.html",user=current_user) 

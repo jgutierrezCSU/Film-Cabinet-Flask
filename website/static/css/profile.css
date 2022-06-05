@@ -136,12 +136,18 @@ ody {
     margin-bottom: 10px;
     padding:0 15px;
 }
-.bio-row-show {
-    background-color:#f8f7f5 ;
+.profile-show {
+    background-color:none;
    
 }
-.bio-row-hidden {
-    background-color:#f8f7f5 ;
+.profile-hidden {
+    background-color:none;
+}
+.edit-save-show{
+    background-color:none;
+}
+.edit-save-hidden{
+    background-color:none;
 }
 
 .bio-row p span {

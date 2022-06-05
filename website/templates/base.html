@@ -52,7 +52,7 @@
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
 
-          <a class="nav-item nav-link" href="{{ url_for('user.user', username=current_user.user_name) }}">Profile</a>
+          <a class="nav-item nav-link" href="{{ url_for('user_profile.user', username=current_user.user_name) }}">Profile</a>
 
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
@@ -92,6 +92,7 @@
     {% block home_content %} {% endblock %}
     {% block survey_content %} {% endblock %}
     {% block profile_content %} {% endblock %}
+    {% block update_cred_content %} {% endblock %}
 
     
 
