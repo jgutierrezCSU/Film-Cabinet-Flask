@@ -21,7 +21,7 @@ def home():
     #for random Future
  
     # checks if local path exist
-    local_path=exists('website/netflix_titles.csv')
+    #local_path=exists('website/netflix_titles.csv')
     # checks if server path exist
     server_path=exists('/var/www/Film-Cabinet-Flask/website/netflix_titles.csv')
 
@@ -32,7 +32,7 @@ def home():
             row = random.choice(data)# get random row from csv
             if row[5] == "United States":
                 break
-    elif local_path:
+    elif exists('website/netflix_titles.csv'):
         data = list(csv.reader(open('website/netflix_titles.csv',encoding='utf-8'))) # get CSV and turn into list
         #for loop to gey USA films
         while True:
