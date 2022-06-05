@@ -11,7 +11,6 @@ user_profile=Blueprint('user_profile',__name__)
 @user_profile.route('/user/<username>',methods=["GET","POST"])
 @login_required
 def user(username):
-     
     curr_usr_id=current_user.get_id() #get curr user id
     #get user w/ that Unique ID
     user = User.query.filter_by(id=curr_usr_id).first() 
