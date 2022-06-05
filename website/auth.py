@@ -68,10 +68,12 @@ def signup():
 
             db.session.add(new_user) #add new user to DB
             db.session.commit() # update
+             #log in user to a session
+            login_user(new_user,remember=True)
 
             #get new_user unique ID
             curr_usr_id=current_user.get_id() #get curr user id
-            print(curr_usr_id)
+            print("----ID---",curr_usr_id)
 
             #also generate Profile DB w/ defaults
             user_profile = Profile(
@@ -83,8 +85,7 @@ def signup():
             db.session.add(user_profile)
             db.session.commit()
             
-            #log in user to a session
-            login_user(new_user,remember=True)
+           
             flash('Account created!', category='success')
 
             #redirect to survey page:
