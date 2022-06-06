@@ -90,42 +90,77 @@ def signup():
 @login_required
 @auth.route('/update-cred/',methods=["GET","POST"])
 def update_cred():
-    #TODO only commit if data has changed
     #get curr user id
     curr_usr_id=current_user.get_id() 
-    #get user w/ that Unique ID
+    #get user object w/ that Unique ID
     user = User.query.filter_by(id=curr_usr_id).first() 
     if request.method == 'POST':
         new_username = request.form.get('new_username')
         new_email = request.form.get('new_email') 
+
+        #both empty , no need to write to DB
+        if new_username == "" and new_email == "":
+            return redirect(url_for('user_profile.user',username=current_user.user_name))
+
+        # if either empty,Set to original creds
+        if new_username == "":
+            new_username = user.user_name
+        if new_email == "":
+            new_email =user.email
+
+        if len(new_email) < 4:
+            print('Not Valid Email')
+        elif len(new_username) <= 0:
+            print('Not Valid Username length')
+        #find a user in DB w/ that email from input (Object)
+        user_by_email = User.query.filter_by(email=new_email).first()
+        found_email=False
+        if user_by_email:
+            found_email=user_by_email.email
+            # TODO add flash error
+        if found_email == new_email and user.email != new_email: 
+            print('Email already exists.')
+        else:
+            #find a user in DB w/ that user_name from input (Object)
+            user_by_uname = User.query.filter_by(user_name=new_username).first()
+            found_uname=False
+            if user_by_uname:
+                found_uname=user_by_uname.user_name
+                # TODO add flash error
+            if found_uname == new_username and user.user_name != new_username: 
+                print('User already exists.')
+
+            elif len(new_email) < 4:
+                print('Not Valid Email')
+            else:
+                user.user_name=new_username
+                user.email=new_email
+                db.session.commit()
+            return redirect(url_for('user_profile.user',username=current_user.user_name))
+
+
+    return render_template("update_cred.html",user=current_user) 
+
+@login_required
+@auth.route('/update-pword/',methods=["GET","POST"])
+def update_pword():
+    curr_usr_id=current_user.get_id() 
+    #get user w/ that Unique ID
+    user = User.query.filter_by(id=curr_usr_id).first() 
+    if request.method == 'POST':
         new_password = request.form.get('new_password')
         new_password2 = request.form.get('new_password2')
 
         # Input checks
         if new_password != new_password2:
             print('Passwords Do Not Match.')
-        elif new_email != "" and len(new_email) < 4:
-            print('Not Valid Email')
+        elif len(new_password) <= 0:
+            print("Password must be at least 8 characters.")
         else:
-            #find a user in DB w/ that email from input (Object)
-            user_by_email = User.query.filter_by(email=new_email).first()
-            found_email=False
-            if user_by_email:
-                found_email=user_by_email.email
-                # TODO add flash error
-            if found_email == new_email and user.email != new_email:
-                print('Email already exists.')
-
-            #all checks out .Update to DB    
-            else:
-                if new_username != "":
-                    user.user_name=new_username
-                if new_email !="":
-                    user.email=new_email
-                if new_password != "":
-                    user.password=generate_password_hash(new_password, method='sha256')
+            if new_password != "":
+                user.password=generate_password_hash(new_password, method='sha256')
                 db.session.commit()
         return redirect(url_for('user_profile.user',username=current_user.user_name))
 
 
-    return render_template("update_cred.html",user=current_user) 
+    return render_template("update_pword.html",user=current_user) 
