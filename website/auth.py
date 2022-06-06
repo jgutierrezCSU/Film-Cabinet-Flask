@@ -129,14 +129,12 @@ def update_cred():
                 # TODO add flash error
             if found_uname == new_username and user.user_name != new_username: 
                 print('User already exists.')
-
-            elif len(new_email) < 4:
-                print('Not Valid Email')
             else:
+                print("here")
                 user.user_name=new_username
                 user.email=new_email
                 db.session.commit()
-            return redirect(url_for('user_profile.user',username=current_user.user_name))
+                return redirect(url_for('user_profile.user',username=current_user.user_name))
 
 
     return render_template("update_cred.html",user=current_user) 
@@ -160,7 +158,7 @@ def update_pword():
             if new_password != "":
                 user.password=generate_password_hash(new_password, method='sha256')
                 db.session.commit()
-        return redirect(url_for('user_profile.user',username=current_user.user_name))
+            return redirect(url_for('user_profile.user',username=current_user.user_name))
 
 
     return render_template("update_pword.html",user=current_user) 
