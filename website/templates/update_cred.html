@@ -20,19 +20,19 @@
 
                           <div class="form-group">
                               <label for="userName"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                              <input type="text" name="new_username" id="new_username" placeholder="New User Name"/>
+                              <input type="text" name="new_username" id="new_username"  placeholder="{{ user.user_name }}"/>
                           </div>
                           <div class="form-group">
                               <label for="email"><i class="zmdi zmdi-email"></i></label>
-                              <input type="email" name="new_email" id="new_email" placeholder="New Email"/>
+                              <input type="email" name="new_email" id="new_email" style ="font-weight: bold; color: black;" placeholder="{{ user.email }}"/>
                           </div>
                           <div class="form-group">
                               <label for="new_password"><i class="zmdi zmdi-lock"></i></label>
-                              <input type="password" name="new_password" id="new_password" placeholder="Password"/>
+                              <input type="password" name="new_password" id="new_password" style ="font-weight: bold; color: black;" placeholder="*********"/>
                           </div>
                           <div class="form-group">
                               <label for="new_password2"><i class="zmdi zmdi-lock-outline"></i></label>
-                              <input type="password" name="new_password2" id="newpassword2" placeholder="Repeat your password"/>
+                              <input type="password" name="new_password2" id="newpassword2" style ="font-weight: bold; color: black;" placeholder="Repeat your password"/>
                           </div>
                           <!-- <div class="form-group">
                               <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
@@ -41,6 +41,10 @@
                           <div class="form-group form-button" >
                               <button type="submit" name="update_cred" id="update_cred" class="form-submit"  >Save</button>
                           </div>
+                          <div class="form-group form-button" >
+                            <button href="{{ url_for('survey.getSurveyInfo') }}"  name="discard_btn" id="discard_btn" class="form-submit"  >Discard</button>
+                        </div>
+
                       </form>
                   </div>
         

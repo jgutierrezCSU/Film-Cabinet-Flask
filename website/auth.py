@@ -90,26 +90,22 @@ def signup():
 @login_required
 @auth.route('/update-cred/',methods=["GET","POST"])
 def update_cred():
+    #TODO only commit if data has changed
     #get curr user id
     curr_usr_id=current_user.get_id() 
     #get user w/ that Unique ID
     user = User.query.filter_by(id=curr_usr_id).first() 
     if request.method == 'POST':
         new_username = request.form.get('new_username')
-        if new_username == "":
-            new_username=user.user_name
         new_email = request.form.get('new_email') 
-        if new_email =="":
-            new_email=user.email
         new_password = request.form.get('new_password')
-        if new_password == "":
-            new_username=user.password
         new_password2 = request.form.get('new_password2')
+
         # Input checks
         if new_password != new_password2:
-            flash('Passwords Do Not Match.', category='error')
-        elif len(new_email) < 4:
-            flash('Not Valid Email',category='error')
+            print('Passwords Do Not Match.')
+        elif new_email != "" and len(new_email) < 4:
+            print('Not Valid Email')
         else:
             #find a user in DB w/ that email from input (Object)
             user_by_email = User.query.filter_by(email=new_email).first()
@@ -117,15 +113,17 @@ def update_cred():
             if user_by_email:
                 found_email=user_by_email.email
                 # TODO add flash error
-            if found_email == new_email :
+            if found_email == new_email and user.email != new_email:
                 print('Email already exists.')
-            elif len(new_email) < 4:
-                print('Not Valid Email')
+
             #all checks out .Update to DB    
             else:
-                user.user_name=new_username
-                user.email=new_email
-                user.password=generate_password_hash(new_password, method='sha256')
+                if new_username != "":
+                    user.user_name=new_username
+                if new_email !="":
+                    user.email=new_email
+                if new_password != "":
+                    user.password=generate_password_hash(new_password, method='sha256')
                 db.session.commit()
         return redirect(url_for('user_profile.user',username=current_user.user_name))
 
