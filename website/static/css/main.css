@@ -13,3 +13,10 @@ background-image: url('../images/homebg2.jpg');
 background-size: contain;
 
 }
+.movie_display_img{
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    background-size: contain;
+
+}
