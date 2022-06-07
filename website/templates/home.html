@@ -1,50 +1,307 @@
 {% extends "base.html" %}
 
 
-
-{% block home_content %}
-<title>Home</title>
-<h1> This is the Home Page</h1>
-{% endblock %}
-
 {% block random_movie_content %}
-<div class="container master">
-  <div>
-    <a href="{{ url_for('views.home') }}">
-      <button style="position: relative; left: 0;">
-        Down Vote
-      </button>
-    </a>
-  </div>
 
-  <div class="movie-card">
-    <img src={{movie.image}} alt="movie">
-    <div class="text">
-      <h4><b>{{movie.title}}</b></h4>
-      <p class="marker"> <i class="fa fa-imdb" aria-hidden="true"></i> {{movie.imdb}}/10</p>
-        <p class="marker"><i class="fa fa-calendar" aria-hidden="true"></i> {{movie.release_year}}</p>
-      <p class="marker"> <i class="fa fa-film" aria-hidden="true"></i> {{movie.genre}}</p>
-      <p class="marker"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{movie.duration}} </p>
-        <p class="marker"> <i class="fa fa-globe" aria-hidden="true"></i> {{movie.country}}</p>
-      <hr>
-      <p>{{movie.description}}</p>
+<script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.5.3/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.5.3/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/main.css">
+
+<div class="home_image" > 
+<div id="movieSection">
+    <div>
+        <div class="container pt-3 text-light position-relative">
+            <nav class="navbar navbar-expand-md navbar-light p-0">
+                <a class="navbar-brand " href="#">
+                    <img src="{{movie.image}}" width="200" height="60" alt="...">
+                </a>
+            </nav>
+            <p></p>
+            <h2 class="my-5">Going to the movies....</h2>
+            <p>Full width section with background image with a gradient overlay. 3 slider instances in full width with 6 items per page.</p>
+        </div>
+        <div class="container-fluid position-relative">
+            <h2 class="text-light mt-3 mt-xl-5 mb-2">Trending</h2>
+            <div class="swiffy-slider slider-item-show5 slider-item-reveal slider-item-ratio slider-item-ratio-2x1">
+                <div class="slider-container">
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                </div>
+
+                <button type="button" class="slider-nav"></button>
+                <button type="button" class="slider-nav slider-nav-next"></button>
+
+            </div>
+
+            <h2 class="text-light mt-3 mt-xl-5 mb-2">Documentary</h2>
+            <div class="swiffy-slider slider-item-show5 slider-item-reveal slider-item-snapstart slider-item-ratio slider-item-ratio-2x1">
+                <div class="slider-container">
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                </div>
+
+                <button type="button" class="slider-nav"></button>
+                <button type="button" class="slider-nav slider-nav-next"></button>
+            </div>
+
+            <h2 class="text-light mt-3 mt-xl-5 mb-2">Just released</h2>
+            <div class="swiffy-slider slider-item-show5 slider-item-ratio slider-item-ratio-2x1">
+                <div class="slider-container">
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                </div>
+
+                <button type="button" class="slider-nav"></button>
+                <button type="button" class="slider-nav slider-nav-next"></button>
+
+            </div>
+
+            <h2 class="text-light mt-3 mt-xl-5 mb-2">Documentary</h2>
+            <div class="swiffy-slider slider-item-show5 slider-item-reveal slider-item-snapstart slider-item-ratio slider-item-ratio-2x1">
+                <div class="slider-container">
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                </div>
+
+                <button type="button" class="slider-nav"></button>
+                <button type="button" class="slider-nav slider-nav-next"></button>
+            </div>
+
+            <h2 class="text-light mt-3 mt-xl-5 mb-2">Documentary</h2>
+            <div class="swiffy-slider slider-item-show5 slider-item-reveal slider-item-snapstart slider-item-ratio slider-item-ratio-2x1">
+                <div class="slider-container">
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                </div>
+
+                <button type="button" class="slider-nav"></button>
+                <button type="button" class="slider-nav slider-nav-next"></button>
+            </div>
+
+            <h2 class="text-light mt-3 mt-xl-5 mb-2">Documentary</h2>
+            <div class="swiffy-slider slider-item-show5 slider-item-reveal slider-item-snapstart slider-item-ratio slider-item-ratio-2x1">
+                <div class="slider-container">
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                    <div>
+                        <img src="{{movie.image}}" alt="...">
+                    </div>
+                </div>
+
+                <button type="button" class="slider-nav"></button>
+                <button type="button" class="slider-nav slider-nav-next"></button>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div>
-    <a href="{{ url_for('views.home') }}">
-      <button >Like
-      </button>
-    </a>
-  </div>
 </div>
 
-<div class="container">
-  <div>
-    <button class="button watch" onclick="window.open('https://www.netflix.com/watch/{{movie.id}}', '_blank')"target='0'>
-      Watch 
-      <i class="fa fa-star"></i>
-    </button>
-  </div>
+<br>
+<br>
+<br>
+
 </div>
+
+
 {% endblock %}

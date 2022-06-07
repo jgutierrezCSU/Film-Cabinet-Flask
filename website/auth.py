@@ -130,7 +130,6 @@ def update_cred():
             if found_uname == new_username and user.user_name != new_username: 
                 print('User already exists.')
             else:
-                print("here")
                 user.user_name=new_username
                 user.email=new_email
                 db.session.commit()

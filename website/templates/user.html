@@ -206,15 +206,4 @@
         }
 	</script>
 
-
-    <h1>Hello: {{ user.user_name }}</h1>
-    <hr>
-    {% for post in posts %}
-    <p>
-    {{ post.author.user_name }} says: <b>{{ post.body }}</b>
-    </p>
-    {% endfor %}
-
-
-
 {% endblock %}

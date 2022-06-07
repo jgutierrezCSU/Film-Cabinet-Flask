@@ -8,3 +8,8 @@ height: 1px;
 background: #eee;
 }
 /* end log in */
+.home_image{
+background-image: url('../images/homebg2.jpg');
+background-size: contain;
+
+}

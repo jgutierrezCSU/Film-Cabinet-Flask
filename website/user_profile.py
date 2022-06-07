@@ -37,9 +37,4 @@ def user(username):
         
     #get user to send to front end
     user = User.query.filter_by(user_name=username).first_or_404()
-    posts = [
-    	#pass user object to user.html
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts,profile=profile)
+    return render_template('user.html', user=user,profile=profile)

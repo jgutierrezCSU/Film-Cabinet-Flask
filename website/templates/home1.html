@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+
+{% block home_content %}
+<title>Home</title>
+<h1> This is the Home Page</h1>
+{% endblock %}
+
+{% block random_movie_content %}
+<div class="container master">
+  <div>
+    <a href="{{ url_for('views.home') }}">
+      <button style="position: relative; left: 0;">
+        Down Vote
+      </button>
+    </a>
+  </div>
+
+  <div class="movie-card">
+    <img src={{movie.image}} alt="movie">
+    <div class="text">
+      <h4><b>{{movie.title}}</b></h4>
+      <p class="marker"> <i class="fa fa-imdb" aria-hidden="true"></i> {{movie.imdb}}/10</p>
+        <p class="marker"><i class="fa fa-calendar" aria-hidden="true"></i> {{movie.release_year}}</p>
+      <p class="marker"> <i class="fa fa-film" aria-hidden="true"></i> {{movie.genre}}</p>
+      <p class="marker"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{movie.duration}} </p>
+        <p class="marker"> <i class="fa fa-globe" aria-hidden="true"></i> {{movie.country}}</p>
+      <hr>
+      <p>{{movie.description}}</p>
+    </div>
+  </div>
+
+  <div>
+    <a href="{{ url_for('views.home') }}">
+      <button >Like
+      </button>
+    </a>
+  </div>
+</div>
+
+<div class="container">
+  <div>
+    <button class="button watch" onclick="window.open('https://www.netflix.com/watch/{{movie.id}}', '_blank')"target='0'>
+      Watch 
+      <i class="fa fa-star"></i>
+    </button>
+  </div>
+</div>
+
+{% endblock %}
