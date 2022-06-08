@@ -4,7 +4,7 @@ from website import db
 from website.models import User, Profile
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-
+""" UNIT TESTING"""
 
 # Initiate Database
 def init_database():
