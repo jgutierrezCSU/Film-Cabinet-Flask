@@ -1,10 +1,12 @@
 from flask import Blueprint, redirect, render_template,request,flash, url_for
 from .models import User , Profile
 from werkzeug.security import generate_password_hash, check_password_hash
+
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 #Blueprint allows you to define URL 
+
 auth=Blueprint('auth',__name__)
 
 @auth.route('/login/',methods=["GET","POST"])
@@ -34,15 +36,17 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-
 @auth.route('/sign-up/',methods=["GET","POST"])
 def signup():
+
     if request.method == 'POST':
         #get Info from login.htnl after submit
         email = request.form.get('email')
         user_name = request.form.get('userName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+       
+
         #find User w/ Email
         #check if already a userw/ that email
         user = User.query.filter_by(email=email).first()
@@ -66,6 +70,7 @@ def signup():
             db.session.commit() # update
              #log in user to a session
             login_user(new_user,remember=True)
+
             #get new_user unique ID
             curr_usr_id=current_user.get_id() #get curr user id
             #also generate Profile DB w/ defaults
@@ -77,17 +82,16 @@ def signup():
                            )
             db.session.add(user_profile)
             db.session.commit()
-            flash('Account created!', category ='success')
+            flash('Account created!', category='success')
             #redirect to survey page:
             return redirect(url_for('survey.getSurveyInfo'))
     return render_template("signup.html",user=current_user) # current_user from built in library
-
 
 @login_required
 @auth.route('/update-cred/',methods=["GET","POST"])
 def update_cred():
     #get curr user id
-    curr_usr_id = current_user.get_id() 
+    curr_usr_id=current_user.get_id() 
     #get user object w/ that Unique ID
     user = User.query.filter_by(id=curr_usr_id).first() 
     if request.method == 'POST':
@@ -102,7 +106,7 @@ def update_cred():
         if new_username == "":
             new_username = user.user_name
         if new_email == "":
-            new_email = user.email
+            new_email =user.email
 
         if len(new_email) < 4:
             print('Not Valid Email')
@@ -110,26 +114,31 @@ def update_cred():
             print('Not Valid Username length')
         #find a user in DB w/ that email from input (Object)
         user_by_email = User.query.filter_by(email=new_email).first()
-        found_email = False
+        found_email=False
         if user_by_email:
-            found_email = user_by_email.email
+            found_email=user_by_email.email
             # TODO add flash error
         if found_email == new_email and user.email != new_email: 
             print('Email already exists.')
         else:
             #find a user in DB w/ that user_name from input (Object)
             user_by_uname = User.query.filter_by(user_name=new_username).first()
-            found_uname = False
+            found_uname=False
             if user_by_uname:
-                found_uname = user_by_uname.user_name
+                found_uname=user_by_uname.user_name
                 # TODO add flash error
             if found_uname == new_username and user.user_name != new_username: 
                 print('User already exists.')
+
+            elif len(new_email) < 4:
+                print('Not Valid Email')
             else:
-                user.user_name = new_username
-                user.email = new_email
+                user.user_name=new_username
+                user.email=new_email
                 db.session.commit()
-                return redirect(url_for('user_profile.user',username=current_user.user_name))
+            return redirect(url_for('user_profile.user',username=current_user.user_name))
+
+
     return render_template("update_cred.html",user=current_user) 
 
 @login_required
@@ -141,6 +150,7 @@ def update_pword():
     if request.method == 'POST':
         new_password = request.form.get('new_password')
         new_password2 = request.form.get('new_password2')
+
         # Input checks
         if new_password != new_password2:
             print('Passwords Do Not Match.')
@@ -150,5 +160,7 @@ def update_pword():
             if new_password != "":
                 user.password=generate_password_hash(new_password, method='sha256')
                 db.session.commit()
-            return redirect(url_for('user_profile.user',username=current_user.user_name))
+        return redirect(url_for('user_profile.user',username=current_user.user_name))
+
+
     return render_template("update_pword.html",user=current_user) 
