@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, render_template
 from os.path import exists
 from website.auth import login
@@ -46,34 +47,53 @@ def home():
             row = random.choice(data)  # get random row from csv
             if row[5] == "United States":
                 break
-    movie = {
-        "id": row[0],
-        "category": row[1],
-        "title": row[2],
-        "director": row[3],
-        "cast": row[4],
-        "country": row[5],
-        "date_added": row[6],
-        "release_year": row[7],
-        "maturity": row[8],
-        "duration": row[9],
-        "genre": row[10],
-        "description": row[11],
-        "image": "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-300x450.jpg",
-        "imdb": "Not Available",
-    }
 
-    # get cover image
-    # call OMDB database
-    url = f"http://www.omdbapi.com/?t={movie['title']}/&apikey={config.api_key}"
+    # from tmdb
+    response = requests.get('https://api.themoviedb.org/3/discover/movie?api_key=' +  config.api_key2 + '&primary_release_year=2020&sort_by=revenue.desc')
+    highest_revenue = response.json() # store parsed json response
+    highest_revenue_films = highest_revenue['results']
+    # # get index position
+    # c=0
+    # for key, value in highest_revenue_films[0].items():
+    #     print(c,":",key)
+    #     c+=1
+    # print(highest_revenue_films[-1])
+    random_choice= random.randint(0,len(highest_revenue_films))
+    print(len(highest_revenue_films))
+    print(random_choice)
+
+    movie = {
+        "id": highest_revenue_films[random_choice]["id"],
+        "category": highest_revenue_films[random_choice]["genre_ids"],
+        "title": highest_revenue_films[random_choice]["title"],
+        # "director": row[3],
+        # "cast": row[4],
+        # "country": row[5],
+        "release_date": highest_revenue_films[random_choice]["release_date"],
+        # "release_year": row[7],
+        # "maturity": row[8],
+        # "duration": row[9],
+        # "genre": row[10],
+        "overview":highest_revenue_films[random_choice]["overview"],
+        "poster_path": highest_revenue_films[random_choice]['poster_path'],
+        "default_image": "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-300x450.jpg",
+        "vote_average": highest_revenue_films[random_choice]["vote_average"],
+        "image": f"https://image.tmdb.org/t/p/original/{highest_revenue_films[random_choice]['poster_path']}"
+    }
+    url="https://api.themoviedb.org/3/movie/524047/watch/providers?api_key=a594b9969faa07c895f9e33649889404"
+    r=requests.request("GET",url)
+    print(r.json()['results'])
+    # image="https://image.tmdb.org/t/p/original/wigZBAmNrIhxp2FNGOROUAeHvdh.jpg"
+    # url = f"https://image.tmdb.org/t/p/original/{movie['poster_path']}"
     # get back the response
-    response = requests.request("GET", url)
+    # response = requests.request("GET", url)
     # parse result into JSON and look for matching data if available
-    movie_data = response.json()
-    if "Poster" in movie_data:
-        movie["image"] = movie_data["Poster"]
-    if "imdbRating" in movie_data:
-        movie["imdb"] = movie_data["imdbRating"]
+    # movie_data = response.json()
+    # print(movie_data)
+    # if "Poster" in movie_data:
+    #     movie["image"] = image
+    # if "imdbRating" in movie_data:
+    #     movie["imdb"] = movie_data["imdbRating"]
 
     # end random Future
     # passes user to base, display certain items if logged in, else does not display
