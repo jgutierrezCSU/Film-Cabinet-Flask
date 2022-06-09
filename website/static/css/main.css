@@ -8,12 +8,14 @@ height: 1px;
 background: #eee;
 }
 /* end log in */
-.home_image{
-background-image: url('../images/homebg2.jpg');
-background-size: contain;
+.movieSection{
+background-color: rgb(12, 43, 70);
+/* background-image: url('../images/homebg2.jpg'); */
+/* background-size: contain; */
 
 }
 .movie_display_img{
+    /* filter: drop-shadow(5px 50px 1px #000000); */
     border-radius: 10px;
     width: 100%;
     height: auto;
