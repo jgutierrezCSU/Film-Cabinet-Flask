@@ -59,8 +59,8 @@ def home():
     #     c+=1
     # print(highest_revenue_films[-1])
     random_choice= random.randint(0,len(highest_revenue_films))
-    print(len(highest_revenue_films))
-    print(random_choice)
+    # print(len(highest_revenue_films))
+    # print(random_choice)
 
     movie = {
         "id": highest_revenue_films[random_choice]["id"],
@@ -80,9 +80,9 @@ def home():
         "vote_average": highest_revenue_films[random_choice]["vote_average"],
         "image": f"https://image.tmdb.org/t/p/original/{highest_revenue_films[random_choice]['poster_path']}"
     }
-    url="https://api.themoviedb.org/3/movie/524047/watch/providers?api_key=a594b9969faa07c895f9e33649889404"
-    r=requests.request("GET",url)
-    print(r.json()['results'])
+    # url="https://api.themoviedb.org/3/movie/524047/watch/providers?api_key=a594b9969faa07c895f9e33649889404"
+    # r=requests.request("GET",url)
+    # print(r.json()['results'])
     # image="https://image.tmdb.org/t/p/original/wigZBAmNrIhxp2FNGOROUAeHvdh.jpg"
     # url = f"https://image.tmdb.org/t/p/original/{movie['poster_path']}"
     # get back the response
