@@ -20,6 +20,46 @@ views = Blueprint("views", __name__)
 @views.route("/")
 @login_required
 def home():
+    cur_pop_movies_lst = generate_curr_popular()
+   
+    # passes user to base, display certain items if logged in, else does not display
+    return render_template("home.html", user=current_user, movie=cur_pop_movies_lst,cur_pop_movies_lst=cur_pop_movies_lst)
+
+def generate_curr_popular():
+     # from tmdb to get current popular movies , tmdb updates this API daily
+    response = requests.get('https://api.themoviedb.org/3/movie/popular?api_key='+  config.api_key2 + '&language=en-US&page=1')
+    
+    cur_pop_movies_r = response.json() # store parsed json response
+    # list of dictionaries. each index is a dict
+    fetched_cur_pop_movie_lst = cur_pop_movies_r['results']
+    # # get index position and display attributes
+    c=0
+    for key, value in fetched_cur_pop_movie_lst[0].items():
+        print(c,":",key)
+        c+=1
+   
+    print(len(fetched_cur_pop_movie_lst))
+    # Get data from retrieved lst dict and populate with relavent data
+    cur_pop_movies_lst= []
+    for movie in fetched_cur_pop_movie_lst:
+        cur_movie = {
+        "id": movie["id"],
+        "category": movie["genre_ids"],
+        "title": movie["title"],
+        "release_date": movie["release_date"],
+        "overview":movie["overview"],
+        "poster_path": movie['poster_path'],
+        "default_image": "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-300x450.jpg",
+        "vote_average": movie["vote_average"],
+        "image": f"https://image.tmdb.org/t/p/original/{movie['poster_path']}"
+         }
+        cur_pop_movies_lst.append(cur_movie)
+        print(cur_pop_movies_lst[0])
+
+    return cur_pop_movies_lst
+
+
+def generate_random_movies():
     # for random Future
     # checks if server path exist
     server_path = exists("/var/www/Film-Cabinet-Flask/website/netflix_titles.csv")
@@ -47,54 +87,4 @@ def home():
             row = random.choice(data)  # get random row from csv
             if row[5] == "United States":
                 break
-
-    # from tmdb
-    response = requests.get('https://api.themoviedb.org/3/discover/movie?api_key=' +  config.api_key2 + '&primary_release_year=2020&sort_by=revenue.desc')
-    highest_revenue = response.json() # store parsed json response
-    highest_revenue_films = highest_revenue['results']
-    # # get index position
-    # c=0
-    # for key, value in highest_revenue_films[0].items():
-    #     print(c,":",key)
-    #     c+=1
-    # print(highest_revenue_films[-1])
-    random_choice= random.randint(0,len(highest_revenue_films))
-    # print(len(highest_revenue_films))
-    # print(random_choice)
-
-    movie = {
-        "id": highest_revenue_films[random_choice]["id"],
-        "category": highest_revenue_films[random_choice]["genre_ids"],
-        "title": highest_revenue_films[random_choice]["title"],
-        # "director": row[3],
-        # "cast": row[4],
-        # "country": row[5],
-        "release_date": highest_revenue_films[random_choice]["release_date"],
-        # "release_year": row[7],
-        # "maturity": row[8],
-        # "duration": row[9],
-        # "genre": row[10],
-        "overview":highest_revenue_films[random_choice]["overview"],
-        "poster_path": highest_revenue_films[random_choice]['poster_path'],
-        "default_image": "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-300x450.jpg",
-        "vote_average": highest_revenue_films[random_choice]["vote_average"],
-        "image": f"https://image.tmdb.org/t/p/original/{highest_revenue_films[random_choice]['poster_path']}"
-    }
-    # url="https://api.themoviedb.org/3/movie/524047/watch/providers?api_key=a594b9969faa07c895f9e33649889404"
-    # r=requests.request("GET",url)
-    # print(r.json()['results'])
-    # image="https://image.tmdb.org/t/p/original/wigZBAmNrIhxp2FNGOROUAeHvdh.jpg"
-    # url = f"https://image.tmdb.org/t/p/original/{movie['poster_path']}"
-    # get back the response
-    # response = requests.request("GET", url)
-    # parse result into JSON and look for matching data if available
-    # movie_data = response.json()
-    # print(movie_data)
-    # if "Poster" in movie_data:
-    #     movie["image"] = image
-    # if "imdbRating" in movie_data:
-    #     movie["imdb"] = movie_data["imdbRating"]
-
     # end random Future
-    # passes user to base, display certain items if logged in, else does not display
-    return render_template("home.html", user=current_user, movie=movie)

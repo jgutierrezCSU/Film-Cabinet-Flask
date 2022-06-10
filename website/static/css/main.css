@@ -12,10 +12,11 @@ background: #eee;
 background-color: rgb(12, 43, 70);
 /* background-image: url('../images/homebg2.jpg'); */
 /* background-size: contain; */
+margin:0 auto; /* this will center the page */
+width:1300px; /*  use your width here */
 
 }
 .movie_display_img{
-    /* filter: drop-shadow(5px 50px 1px #000000); */
     border-radius: 10px;
     width: 100%;
     height: auto;

@@ -28,18 +28,11 @@ def user(username):
         new_dob = request.form.get("edit_dob")
         if new_dob == "":
             new_dob = profile.dob
-            print("1", new_fullname)
-            print("1", new_country)
-            print("1", new_dob)
-
-        print(new_fullname)
-        print(new_country)
-        print(new_dob)
+       
         profile.full_name = new_fullname
         profile.country = new_country
         profile.dob = new_dob
         db.session.commit()
-        print("here")
     # get user to send to front end
     user = User.query.filter_by(user_name=username).first_or_404()
     return render_template("user.html", user=user, profile=profile)
