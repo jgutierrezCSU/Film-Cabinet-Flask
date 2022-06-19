@@ -88,7 +88,7 @@ def generate_curr_pop_tv_shows():
     for key, value in fetched_cur_pop_tv_shows_lst[0].items():
         print(c, ":", key)
         c += 1
-    print(fetched_cur_pop_tv_shows_lst[7])
+    # print(fetched_cur_pop_tv_shows_lst[7])
     print(len(fetched_cur_pop_tv_shows_lst))
     # Get data from retrieved lst dict and populate with relavent data
     cur_pop_tv_shows_lst = []
