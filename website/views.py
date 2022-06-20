@@ -50,20 +50,14 @@ def generate_curr_pop_movies():
     #     print(c, ":", key)
     #     c += 1
 
-    # https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=<<api_key>>
-    movie_providers_request = requests.get(
-        "https://api.themoviedb.org/3/movie/"
-        + str(fetched_cur_pop_movie_lst[0]["id"])
-        + "/watch/providers?api_key="
-        + config.api_key2
-    )
-    movie_provider_lst = movie_providers_request.json()["results"]["US"]
-    print(movie_provider_lst["rent"])
-    for i in movie_provider_lst["rent"]:
-        print(i["provider_name"])
+       
+    # print(movie_provider_lst["rent"])
+    # for i in movie_provider_lst["rent"]:
+    #     print(i["provider_name"])
     # print(len(fetched_cur_pop_movie_lst))
     # Get data from retrieved lst dict and populate with relavent data
     cur_pop_movies_lst = []
+    # cc=0
     for movie in fetched_cur_pop_movie_lst:
         cur_movie = {
             "id": movie["id"],
@@ -77,6 +71,39 @@ def generate_curr_pop_movies():
             "image": f"https://image.tmdb.org/t/p/original/{movie['poster_path']}",
         }
 
+        """ https://developers.themoviedb.org/3/movies/get-movie-details """
+        # detaile for production status needed, checks if in theater(not streamable) or streamable
+        # movie_details_request = requests.get(
+        # "https://api.themoviedb.org/3/movie/"
+        # + str(movie["id"])
+        # + "?api_key="
+        # + config.api_key2
+        # +"&language=en-US"
+        # )
+        # cur_movie["status"].append(movie_details_request.json()["status"])
+        # print("--------------\n",movie_details_request.json()["status"])
+         
+        movie_providers_request = requests.get(
+        "https://api.themoviedb.org/3/movie/"
+        + str(movie["id"])
+        + "/watch/providers?api_key="
+        + config.api_key2
+        )
+        # if cc==3 or cc ==2:
+        #     movie_provider_lst = movie_providers_request.json()["results"]
+        #     print(movie_provider_lst)
+        # cc+=1
+        movie_provider_lst = movie_providers_request.json()["results"]
+        if movie_provider_lst:
+            print(type(movie_provider_lst))
+            # print(movie_provider_lst["US"]["rent"]["provider_name"])
+            # cur_movie["provider_name"].append(movie_provider_lst["US"]["rent"]["provider_name"])
+        else:
+             cur_movie["provider_name"]="None Avaialable"
+            
+        # print("---------\n",movie_provider_lst['US'])
+        # movie_provider_lst=movie_provider_lst["rent"]
+        # print(movie_provider_lst)
         cur_pop_movies_lst.append(cur_movie)
         # print(cur_pop_movies_lst[0])
 
@@ -96,12 +123,11 @@ def generate_curr_pop_tv_shows():
     # list of dictionaries. each index is a dict
     fetched_cur_pop_tv_shows_lst = cur_pop_tv_shows_r["results"]
     # # get index position and display attributes
-    c = 0
-    for key, value in fetched_cur_pop_tv_shows_lst[0].items():
-        print(c, ":", key)
-        c += 1
+    # c = 0
+    # for key, value in fetched_cur_pop_tv_shows_lst[0].items():
+    #     print(c, ":", key)
+    #     c += 1
     # print(fetched_cur_pop_tv_shows_lst[7])
-    print(len(fetched_cur_pop_tv_shows_lst))
     # Get data from retrieved lst dict and populate with relavent data
     cur_pop_tv_shows_lst = []
     for tv_show in fetched_cur_pop_tv_shows_lst:
