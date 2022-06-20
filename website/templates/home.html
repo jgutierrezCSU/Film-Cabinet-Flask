@@ -18,66 +18,11 @@
             <h2 class="text-light mt-3 mt-xl-5 mb-2">Current 20 Popular Movies</h2>
             <div class="swiffy-slider slider-item-show5 slider-item-reveal slider-item-ratio slider-item-ratio-3x4" style="filter: drop-shadow(2px 2px 20px #000000);">
                 <div class="slider-container">
+                    {% for pop_movie in cur_pop_movies_lst %}
                     <div>
-                        <img src="{{cur_pop_movies_lst[0].image}}" class ="movie_display_img" alt="...">
+                        <img src="{{pop_movie.image}}" class ="movie_display_img" alt="...">
                     </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[1].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[2].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[3].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[4].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[5].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[6].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[7].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[8].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[9].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[10].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[11].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[12].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[13].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[14].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[15].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[16].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[17].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[18].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_movies_lst[19].image}}" class ="movie_display_img" alt="...">
-                    </div>
+                    {% endfor %}
                  
                 </div>
 
@@ -89,66 +34,11 @@
             <h2 class="text-light mt-3 mt-xl-5 mb-2">Top 20 TV Shows</h2>
             <div class="swiffy-slider slider-item-show5 slider-item-reveal slider-item-snapstart slider-item-ratio slider-item-ratio-3x4" style="filter: drop-shadow(2px 2px 20px #000000);">
                 <div class="slider-container">
+                    {% for pop_tv_show in cur_pop_tv_show_lst %}
                     <div>
-                        <img src="{{cur_pop_tv_show_lst[0].image}}" class ="movie_display_img" alt="...">
+                        <img src="{{pop_tv_show.image}}" class ="movie_display_img" alt="...">
                     </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[1].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[2].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[3].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[4].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[5].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[6].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[7].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[8].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[9].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[10].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[11].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[12].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[13].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[14].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[15].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[16].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[17].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[18].image}}" class ="movie_display_img" alt="...">
-                    </div>
-                    <div>
-                        <img src="{{cur_pop_tv_show_lst[19].image}}" class ="movie_display_img" alt="...">
-                    </div>
+                    {% endfor %}
                 </div>
 
                 <button type="button" class="slider-nav"></button>

@@ -50,7 +50,18 @@ def generate_curr_pop_movies():
     #     print(c, ":", key)
     #     c += 1
 
-    print(len(fetched_cur_pop_movie_lst))
+    # https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=<<api_key>>
+    movie_providers_request = requests.get(
+        "https://api.themoviedb.org/3/movie/"
+        + str(fetched_cur_pop_movie_lst[0]["id"])
+        + "/watch/providers?api_key="
+        + config.api_key2
+    )
+    movie_provider_lst = movie_providers_request.json()["results"]["US"]
+    print(movie_provider_lst["rent"])
+    for i in movie_provider_lst["rent"]:
+        print(i["provider_name"])
+    # print(len(fetched_cur_pop_movie_lst))
     # Get data from retrieved lst dict and populate with relavent data
     cur_pop_movies_lst = []
     for movie in fetched_cur_pop_movie_lst:
@@ -65,6 +76,7 @@ def generate_curr_pop_movies():
             "vote_average": movie["vote_average"],
             "image": f"https://image.tmdb.org/t/p/original/{movie['poster_path']}",
         }
+
         cur_pop_movies_lst.append(cur_movie)
         # print(cur_pop_movies_lst[0])
 
@@ -92,17 +104,17 @@ def generate_curr_pop_tv_shows():
     print(len(fetched_cur_pop_tv_shows_lst))
     # Get data from retrieved lst dict and populate with relavent data
     cur_pop_tv_shows_lst = []
-    for movie in fetched_cur_pop_tv_shows_lst:
+    for tv_show in fetched_cur_pop_tv_shows_lst:
         cur_movie = {
-            "id": movie["id"],
-            "category": movie["genre_ids"],
-            "title": movie["name"],
-            "release_date": movie["first_air_date"],
-            "overview": movie["overview"],
-            "poster_path": movie["poster_path"],
-            "default_image": "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-1-300x450.jpg",
-            "vote_average": movie["vote_average"],
-            "image": f"https://image.tmdb.org/t/p/original/{movie['poster_path']}",
+            "id": tv_show["id"],
+            "category": tv_show["genre_ids"],
+            "title": tv_show["name"],
+            "release_date": tv_show["first_air_date"],
+            "overview": tv_show["overview"],
+            "poster_path": tv_show["poster_path"],
+            "default_image": "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-tv_show-1-1-300x450.jpg",
+            "vote_average": tv_show["vote_average"],
+            "image": f"https://image.tmdb.org/t/p/original/{tv_show['poster_path']}",
         }
         cur_pop_tv_shows_lst.append(cur_movie)
         # print(cur_pop_movies_lst[0])
